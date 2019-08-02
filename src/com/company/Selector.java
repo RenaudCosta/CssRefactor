@@ -22,11 +22,7 @@ public class Selector {
     }
 
     public void addProperty(Property p) {
-        for (Property e : properties) {
-            if (p.getName().equals(e.getName())) {
-                properties.remove(e);
-            }
-        }
+        properties.removeIf(e -> p.getName().equals(e.getName()));
         properties.add(p);
     }
 

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 
-    private String[] tests = {"spacing", "duplicate_selectors"};
+    private String[] tests = {"spacing", "duplicate_selectors", "duplicate_property"};
 
     @org.junit.jupiter.api.Test
     void parse() {
@@ -41,8 +41,9 @@ class ParserTest {
                 line2 = br2.readLine();
                 if (!line1.equals(line2))
                 {
-                    System.out.println(line1);
-                    System.out.println(line2);
+                    System.err.println(line1);
+                    System.err.println(line2);
+                    System.err.println();
                     return false;
                 }
             }
