@@ -1,8 +1,6 @@
 package com.company;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -10,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 
-    String[] tests = {"spacing"};
+    private String[] tests = {"spacing", "duplicate_selectors"};
 
     @org.junit.jupiter.api.Test
     void parse() {
         for (String test : tests) {
             try {
-                Parser p = new Parser("test/resources/in/" + test + ".css", "test/resources/out/out_"+ test + ".css");
+                Parser p = new Parser("test/resources/in/" + test + ".css", "test/resources/out/"+ test + ".css");
                 p.parse();
                 p.write();
             } catch (IOException e) {
@@ -28,30 +26,29 @@ class ParserTest {
     @org.junit.jupiter.api.Test
     void write() {
         for (String test : tests) {
-            File expected = new File("test/resources/in/" + test + ".css");
-            File out = new File("test/resources/out/out_" + test + ".css");
+            File expected = new File("test/resources/expected/" + test + ".css");
+            File out = new File("test/resources/out/" + test + ".css");
             assertTrue(areFilesEqual(expected, out));
         }
     }
 
-    private static boolean areFilesEqual(File in, File out) {
+    private static boolean areFilesEqual(File expected, File out) {
         try {
-            FileInputStream fis1 = new FileInputStream(in);
-            FileInputStream fis2 = new FileInputStream(out);
-            int i1 = fis1.read();
-            int i2 = fis2.read();
-            while (i1 != -1) {
-                if (i1 != i2) {
+            BufferedReader br1 = new BufferedReader(new FileReader(expected));
+            BufferedReader br2 = new BufferedReader(new FileReader(out));
+            String line1, line2;
+            while ((line1 = br1.readLine()) != null) {
+                line2 = br2.readLine();
+                if (!line1.equals(line2))
+                {
+                    System.out.println(line1);
+                    System.out.println(line2);
                     return false;
                 }
-                i1 = fis1.read();
-                i2 = fis2.read();
             }
-            fis1.close();
-            fis2.close();
+            return true;
         } catch (IOException e) {
             return false;
         }
-        return true;
     }
 }

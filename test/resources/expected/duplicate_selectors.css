@@ -1,9 +1,7 @@
-.hey {
-	display: inline;
-}
-
 .class {
 	text-align: center;
+	display: inline;
+	color: purple;
 }
 
 .test {

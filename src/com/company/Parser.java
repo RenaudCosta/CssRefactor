@@ -7,6 +7,7 @@ public class Parser {
 
     List<String> lines = new ArrayList<>();
     Map<String, Selector> selectors = new HashMap<>();
+    List<String> selectorsOrdered = new ArrayList<>();
     String outputPath = "css/out.css";
 
     public Parser(String path) throws IOException {
@@ -39,9 +40,7 @@ public class Parser {
     public void parse() {
 
         String css = this.purify();
-
         String[] split = css.split("[}{]");
-
         String curSelector = "";
 
         for (int i = 0; i < split.length; i++) {
@@ -49,6 +48,7 @@ public class Parser {
             if (i % 2 == 0) { // Selector
                 if (!selectors.containsKey(split[i])) {
                     selectors.put(split[i], new Selector(split[i]));
+                    selectorsOrdered.add(split[i]);
                 }
                 curSelector = split[i];
             }
@@ -63,8 +63,8 @@ public class Parser {
 
     public void write() throws IOException {
         FileWriter fw = new FileWriter(this.outputPath);
-        for (Selector s : selectors.values()) {
-            fw.write(s.toString());
+        for (String selectorName : selectorsOrdered) {
+            fw.write(selectors.get(selectorName).toString());
         }
         fw.close();
     }

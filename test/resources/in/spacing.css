@@ -10,7 +10,7 @@
 }
 
 .hey {
-    display: inline;
+    display:                 inline;
 
 
 
@@ -19,3 +19,4 @@
 }
 
 
+.hello {display:none;}
