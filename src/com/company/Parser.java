@@ -25,6 +25,10 @@ public class Parser {
         this.outputPath = out;
     }
 
+    public Map<String, Selector> getSelectors() {
+        return selectors;
+    }
+
     private String purify() {
         for (int i = 0; i < lines.size(); i++) {
             lines.set(i, lines.get(i).trim());

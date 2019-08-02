@@ -21,7 +21,13 @@ public class Property {
         return "\t"+name+": "+value+";\n";
     }
 
-    public boolean equals(Property p) {
-        return name.equals(p.getName()) && value.equals(p.getValue());
+    @Override
+    public boolean equals(Object p) {
+        if (this == p)
+            return true;
+        if (!(p instanceof Property))
+            return false;
+        Property pp = (Property)p;
+        return name.equals(pp.getName()) && value.equals(pp.getValue());
     }
 }

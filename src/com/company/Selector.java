@@ -13,6 +13,11 @@ public class Selector {
         this.properties = new ArrayList<>();
     }
 
+    public Selector(String name, List<Property> properties) {
+        this.name = name;
+        this.properties = properties;
+    }
+
     public String getName() {
         return name;
     }
@@ -26,8 +31,14 @@ public class Selector {
         properties.add(p);
     }
 
-    public boolean equals(Selector s) {
-        return name.equals(s.name) && properties.containsAll(s.properties) && s.properties.containsAll(properties);
+    @Override
+    public boolean equals(Object s) {
+        if (this == s)
+            return true;
+        if (!(s instanceof Selector))
+            return false;
+        Selector ss = (Selector)s;
+        return name.equals(ss.name) && properties.containsAll(ss.properties) && ss.properties.containsAll(properties);
     }
 
     public String toString() {
