@@ -1,0 +1,4 @@
+display:none|block|inline|inline-block
+position:absolute|relative
+text-align:left|right|center
+color:#\d{3}|#\d{6}|[a-z]+

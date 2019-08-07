@@ -5,10 +5,11 @@ import java.util.*;
 
 public class Parser {
 
-    List<String> lines = new ArrayList<>();
-    Map<String, Selector> selectors = new HashMap<>();
-    List<String> selectorsOrdered = new ArrayList<>();
-    String outputPath = "css/out.css";
+    private List<String> lines = new ArrayList<>();
+    private Map<String, Selector> selectors = new HashMap<>();
+    private List<String> selectorsOrdered = new ArrayList<>();
+    private String outputPath = "css/out.css";
+    private PropertyChecker pc;
 
     public Parser(String path) throws IOException {
         File file = new File(path);
@@ -18,6 +19,7 @@ public class Parser {
         while ((line = br.readLine()) != null) {
             lines.add(line);
         }
+        pc = new PropertyChecker();
     }
 
     public Parser(String path, String out) throws IOException {
@@ -59,7 +61,9 @@ public class Parser {
             else { // Properties
                 if (!curSelector.equals("")) {
                     for (Property p : parseProperties(split[i]))
-                        selectors.get(curSelector).addProperty(p);
+                    {
+                      selectors.get(curSelector).addProperty(p);
+                    }
                 }
             }
         }

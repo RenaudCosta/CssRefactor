@@ -10,4 +10,5 @@ Features:
 Todo:
 
 * Removing unknown instructions
+* Managing selectors hierarchy
 * Manage !important
