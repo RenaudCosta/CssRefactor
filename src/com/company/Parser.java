@@ -62,7 +62,9 @@ public class Parser {
                 if (!curSelector.equals("")) {
                     for (Property p : parseProperties(split[i]))
                     {
-                      selectors.get(curSelector).addProperty(p);
+                      if (pc.propertyIsValid(p)) {
+                        selectors.get(curSelector).addProperty(p);
+                      }
                     }
                 }
             }
