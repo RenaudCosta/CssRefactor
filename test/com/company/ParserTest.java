@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 
-    private String[] tests = {"spacing", "duplicate_selector", "duplicate_property"};
+    private String[] tests = {"spacing", "duplicate_selector", "duplicate_property", "unknown_property"};
 
     private Map<String, Map<String, Selector>> expectedSelectors = new HashMap<>();
 
@@ -17,6 +17,7 @@ class ParserTest {
         initSpacing();
         initDuplicateSelector();
         initDuplicateProperty();
+        initUnknownProperty();
     }
 
     private void initSpacing() {
@@ -50,6 +51,16 @@ class ParserTest {
         selectors.put(".class", c1);
         selectors.put("#id", c2);
         expectedSelectors.put("duplicate_property", selectors);
+    }
+
+    private void initUnknownProperty() {
+        Selector c1 = new Selector(".class", Arrays.asList(new Property[]{new Property("text-align", "left"),
+                new Property("display", "inline")}));
+        Selector c2 = new Selector("#id", Arrays.asList(new Property[]{new Property("display", "none")}));
+        Map<String, Selector> selectors = new HashMap<>();
+        selectors.put(".class", c1);
+        selectors.put("#id", c2);
+        expectedSelectors.put("unknown_property", selectors);
     }
 
     @org.junit.jupiter.api.Test
