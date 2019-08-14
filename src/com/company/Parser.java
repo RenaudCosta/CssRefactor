@@ -38,6 +38,8 @@ public class Parser {
         this.lines.removeIf(e->e.equals(""));
         StringBuilder out = new StringBuilder();
         for (String line : lines) {
+            if (line.contains(":") && !line.endsWith(";") && !line.endsWith(";}"))
+                line = line+";";
             out.append(line);
         }
         return out.toString();

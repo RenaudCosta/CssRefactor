@@ -1,4 +1,6 @@
 display:none|block|inline|inline-block
 position:absolute|relative
 text-align:left|right|center
-color:#\d{3}|#\d{6}|[a-z]+
+color:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|[a-z]+
+background-color:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|[a-z]+
+font-size:0|\d+(\.\d+)?px|\d+(\.\d+)?em|\d+(\.\d+)?rem

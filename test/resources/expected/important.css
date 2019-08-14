@@ -1,11 +1,10 @@
 .class {
     text-align: center !important;
+    display: block !important;
 }
 
 .class {
-    display: inline;
-    display: block !important;
+
     color: purple;
-    text-align: left;
     background-color: black !important;
 }

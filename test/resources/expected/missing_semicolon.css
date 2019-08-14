@@ -1,0 +1,15 @@
+.class {
+	text-align: left;
+	display: inline;
+}
+
+#id {
+	display: none;
+}
+
+color {
+	color: #0ff;
+	background-color: #6A0F23;
+	font-size: 16px;
+}
+

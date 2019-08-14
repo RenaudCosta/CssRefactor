@@ -9,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 
-    private String[] tests = {"spacing", "duplicate_selector", "duplicate_property", "unknown_property"};
+    private String[] tests = {"spacing", "duplicate_selector", "duplicate_property", "unknown_property",
+    "missing_semicolon",};// "important"};
 
     private Map<String, Map<String, Selector>> expectedSelectors = new HashMap<>();
 
@@ -18,6 +19,8 @@ class ParserTest {
         initDuplicateSelector();
         initDuplicateProperty();
         initUnknownProperty();
+        initMissingSemicolon();
+        initImportant();
     }
 
     private void initSpacing() {
@@ -61,6 +64,23 @@ class ParserTest {
         selectors.put(".class", c1);
         selectors.put("#id", c2);
         expectedSelectors.put("unknown_property", selectors);
+    }
+
+    private void initMissingSemicolon() {
+        Selector c1 = new Selector(".class", Arrays.asList(new Property[]{new Property("text-align", "left"),
+                new Property("display", "inline")}));
+        Selector c2 = new Selector("#id", Arrays.asList(new Property[]{new Property("display", "none")}));
+        Selector c3 = new Selector("color", Arrays.asList(new Property[]{new Property("color", "#0ff"),
+                new Property("background-color", "#6A0F23"), new Property("font-size", "16px")}));
+        Map<String, Selector> selectors = new HashMap<>();
+        selectors.put(".class", c1);
+        selectors.put("#id", c2);
+        selectors.put("color", c3);
+        expectedSelectors.put("missing_semicolon", selectors);
+    }
+
+    private void initImportant() {
+
     }
 
     @org.junit.jupiter.api.Test
